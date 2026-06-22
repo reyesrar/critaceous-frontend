@@ -1,0 +1,7 @@
+{
+  "name": "critaceous-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
