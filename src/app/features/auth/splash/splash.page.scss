@@ -1,0 +1,48 @@
+ion-content {
+    --background: #2c302e;
+}
+
+.splash-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.splash-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: fadeIn 0.8s ease-in;
+}
+
+.mascot {
+    font-size: 80px;
+}
+
+.app-name {
+    font-size: 36px;
+    font-weight: 700;
+    color: #9ae19d;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.tagline {
+    font-size: 14px;
+    color: #909590;
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
