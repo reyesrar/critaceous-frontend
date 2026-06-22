@@ -25,33 +25,42 @@ export const routes: Routes = [
       import('./features/auth/register/register.page').then((m) => m.RegisterPage),
   },
   {
-    // Main home screen
+    // Tabs container
     path: 'app',
     loadComponent: () =>
       import('./features/home/home/home.page').then((m) => m.HomePage),
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./features/home/home/home-tab.page').then((m) => m.HomeTabPage),
+      },
+      {
+        path: 'explore',
+        loadComponent: () =>
+          import('./features/explore/explore/explore.page').then((m) => m.ExplorePage),
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./features/profile/profile/profile.page').then((m) => m.ProfilePage),
+      },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/settings/settings.page').then((m) => m.SettingsPage),
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
-    // Explore / search screen
-    path: 'explore',
-    loadComponent: () =>
-      import('./features/explore/explore/explore.page').then((m) => m.ExplorePage),
-  },
-  {
-    // Movie detail
+    // Movie detail (outside tabs)
     path: 'movie/:id',
     loadComponent: () =>
       import('./features/movie-detail/movie-detail/movie-detail.page').then((m) => m.MovieDetailPage),
-  },
-  {
-    // User profile
-    path: 'profile',
-    loadComponent: () =>
-      import('./features/profile/profile/profile.page').then((m) => m.ProfilePage),
-  },
-  {
-    // App settings
-    path: 'settings',
-    loadComponent: () =>
-      import('./features/settings/settings/settings.page').then((m) => m.SettingsPage),
   },
 ];
