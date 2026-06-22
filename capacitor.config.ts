@@ -1,8 +1,10 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'critaceous-frontend',
+  // App identifier for stores
+  appId: 'com.critaceous.app',
+  // Display name on device
+  appName: 'Critaceous',
   webDir: 'www'
 };
 
