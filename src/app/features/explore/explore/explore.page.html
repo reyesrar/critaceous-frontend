@@ -22,6 +22,20 @@
       <ion-select-option value="criticRating">Critic Rating</ion-select-option>
       <ion-select-option value="releaseDate">Release Date</ion-select-option>
     </ion-select>
+
+    <ion-select [(ngModel)]="minUserRating" (ionChange)="applyFilters()" placeholder="Min User ⭐" interface="popover">
+      <ion-select-option [value]="0">Any rating</ion-select-option>
+      <ion-select-option [value]="7">7+</ion-select-option>
+      <ion-select-option [value]="8">8+</ion-select-option>
+      <ion-select-option [value]="9">9+</ion-select-option>
+    </ion-select>
+    
+    <ion-select [(ngModel)]="minCriticRating" (ionChange)="applyFilters()" placeholder="Min Critic 🎬" interface="popover">
+      <ion-select-option [value]="0">Any rating</ion-select-option>
+      <ion-select-option [value]="7">7+</ion-select-option>
+      <ion-select-option [value]="8">8+</ion-select-option>
+      <ion-select-option [value]="9">9+</ion-select-option>
+    </ion-select>
   </div>
 
   <!-- Results -->

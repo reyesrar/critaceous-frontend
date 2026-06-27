@@ -9,6 +9,7 @@ export class MovieService {
     {
       id: '1',
       title: 'Dune: Part Two',
+      actors: ['Timothée Chalamet', 'Zendaya', 'Rebecca Ferguson'],
       poster: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
       synopsis: 'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.',
       releaseDate: '2024-03-01',
@@ -20,6 +21,7 @@ export class MovieService {
     {
       id: '2',
       title: 'Oppenheimer',
+      actors: ['Cillian Murphy', 'Emily Blunt', 'Matt Damon'],
       poster: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg',
       synopsis: 'The story of J. Robert Oppenheimer and his role in the development of the atomic bomb.',
       releaseDate: '2023-07-21',
@@ -31,6 +33,7 @@ export class MovieService {
     {
       id: '3',
       title: 'Poor Things',
+      actors: ['Emma Stone', 'Mark Ruffalo', 'Willem Dafoe'],
       poster: 'https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXEeSo4DyadwJFk.jpg',
       synopsis: 'The incredible tale about the fantastical evolution of Bella Baxter, a young woman brought back to life.',
       releaseDate: '2023-12-08',

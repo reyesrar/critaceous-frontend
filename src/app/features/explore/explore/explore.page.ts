@@ -29,6 +29,8 @@ export class ExplorePage implements OnInit {
   searchTerm = '';
   selectedGenre = '';
   sortBy = 'popularity';
+  minUserRating = 0;
+  minCriticRating = 0;
 
   genres: string[] = [];
 
@@ -50,19 +52,26 @@ export class ExplorePage implements OnInit {
   applyFilters() {
     let result = [...this.allMovies];
 
-    // Filter by search term
     if (this.searchTerm.trim()) {
       result = result.filter((m) =>
         m.title.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
 
-    // Filter by genre
     if (this.selectedGenre) {
       result = result.filter((m) => m.genres.includes(this.selectedGenre));
     }
 
-    // Sort results
+    // Filter by minimum user rating
+    if (this.minUserRating > 0) {
+      result = result.filter((m) => m.userRating >= this.minUserRating);
+    }
+
+    // Filter by minimum critic rating
+    if (this.minCriticRating > 0) {
+      result = result.filter((m) => m.criticRating >= this.minCriticRating);
+    }
+
     result.sort((a, b) => {
       if (this.sortBy === 'userRating') return b.userRating - a.userRating;
       if (this.sortBy === 'criticRating') return b.criticRating - a.criticRating;

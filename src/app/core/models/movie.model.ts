@@ -5,9 +5,9 @@ export interface Movie {
   synopsis: string;
   releaseDate: string;
   genres: string[];
-  // Rating from regular users
+  // Cast members
+  actors: string[];
   userRating: number;
-  // Rating from critics
   criticRating: number;
   popularity: number;
 }
@@ -21,6 +21,5 @@ export interface Comment {
   content: string;
   rating: number;
   createdAt: string;
-  // Marks comment as a critic review
   isCritic: boolean;
 }

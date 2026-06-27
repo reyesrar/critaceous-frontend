@@ -79,6 +79,13 @@ ion-content {
     margin-bottom: 20px;
 }
 
+.actors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
 .no-comments {
     color: #909590;
     font-size: 14px;

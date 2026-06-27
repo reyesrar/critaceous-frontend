@@ -40,6 +40,14 @@
     <h2 class="section-title">Synopsis</h2>
     <p class="synopsis">{{ movie.synopsis }}</p>
 
+    <!-- Actors -->
+    <h2 class="section-title">Actors</h2>
+    <div class="actors">
+      <ion-badge *ngFor="let actor of movie.actors" color="medium">
+        {{ actor }}
+      </ion-badge>
+    </div>
+
     <!-- Comments -->
     <h2 class="section-title">Comments</h2>
     <p *ngIf="comments.length === 0" class="no-comments">No comments yet.</p>
