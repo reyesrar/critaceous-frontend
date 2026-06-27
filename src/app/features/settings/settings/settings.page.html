@@ -1,13 +1,54 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-title>Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <!-- Appearance -->
+  <p class="section-label">Appearance</p>
+  <ion-card class="settings-card">
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label>Dark Mode</ion-label>
+        <ion-toggle [(ngModel)]="darkMode" slot="end" />
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Audio -->
+  <p class="section-label">Audio</p>
+  <ion-card class="settings-card">
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label>Sound Effects</ion-label>
+        <ion-toggle [(ngModel)]="soundEnabled" slot="end" />
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Preferences -->
+  <p class="section-label">Preferences</p>
+  <ion-card class="settings-card">
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-label>Language</ion-label>
+        <ion-select [(ngModel)]="language" interface="popover" slot="end">
+          <ion-select-option value="en">English</ion-select-option>
+          <ion-select-option value="es">Español</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Default Sort</ion-label>
+        <ion-select [(ngModel)]="defaultSort" interface="popover" slot="end">
+          <ion-select-option value="popularity">Popularity</ion-select-option>
+          <ion-select-option value="userRating">User Rating</ion-select-option>
+          <ion-select-option value="criticRating">Critic Rating</ion-select-option>
+          <ion-select-option value="releaseDate">Release Date</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

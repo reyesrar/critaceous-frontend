@@ -1,0 +1,40 @@
+ion-toolbar {
+    --background: #2c302e;
+    --color: #9ae19d;
+}
+
+ion-content {
+    --background: #2c302e;
+}
+
+.section-label {
+    color: #909590;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 16px 4px;
+    margin: 0;
+}
+
+.settings-card {
+    --background: #474a48;
+    margin: 0 16px 4px;
+
+    ion-card-content {
+        padding: 0;
+    }
+
+    ion-item {
+        --background: transparent;
+        --color: #ffffff;
+    }
+
+    ion-select {
+        color: #9ae19d;
+    }
+
+    ion-toggle {
+        --track-background-checked: #537a5a;
+    }
+}
