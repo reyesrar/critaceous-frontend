@@ -1,13 +1,49 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>explore</ion-title>
+    <ion-title>Explore</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">explore</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <!-- Search bar -->
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="applyFilters()" placeholder="Search movies..." debounce="300" />
+
+  <!-- Filters row -->
+  <div class="filters">
+    <ion-select [(ngModel)]="selectedGenre" (ionChange)="applyFilters()" placeholder="Genre" interface="popover">
+      <ion-select-option value="">All genres</ion-select-option>
+      <ion-select-option *ngFor="let g of genres" [value]="g">{{ g }}</ion-select-option>
+    </ion-select>
+
+    <ion-select [(ngModel)]="sortBy" (ionChange)="applyFilters()" placeholder="Sort by" interface="popover">
+      <ion-select-option value="popularity">Popularity</ion-select-option>
+      <ion-select-option value="userRating">User Rating</ion-select-option>
+      <ion-select-option value="criticRating">Critic Rating</ion-select-option>
+      <ion-select-option value="releaseDate">Release Date</ion-select-option>
+    </ion-select>
+  </div>
+
+  <!-- Results -->
+  <div class="results">
+    <p *ngIf="filtered.length === 0" class="no-results">No movies found.</p>
+
+    <ion-card *ngFor="let movie of filtered" class="movie-card" (click)="goToDetail(movie.id)">
+      <div class="card-inner">
+        <img [src]="movie.poster" [alt]="movie.title" class="movie-poster" />
+        <div class="movie-info">
+          <h3 class="movie-title">{{ movie.title }}</h3>
+          <p class="movie-date">{{ movie.releaseDate | date:'yyyy' }}</p>
+          <div class="genres">
+            <ion-badge *ngFor="let g of movie.genres" color="medium">{{ g }}</ion-badge>
+          </div>
+          <div class="ratings">
+            <ion-badge color="success">⭐ {{ movie.userRating }}</ion-badge>
+            <ion-badge color="warning">🎬 {{ movie.criticRating }}</ion-badge>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+
 </ion-content>

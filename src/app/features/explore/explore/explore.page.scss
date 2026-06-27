@@ -1,0 +1,92 @@
+ion-toolbar {
+    --background: #2c302e;
+    --color: #9ae19d;
+}
+
+ion-content {
+    --background: #2c302e;
+}
+
+ion-searchbar {
+    --background: #474a48;
+    --color: #ffffff;
+    --placeholder-color: #909590;
+    --icon-color: #909590;
+    padding: 8px 16px;
+}
+
+.filters {
+    display: flex;
+    gap: 12px;
+    padding: 0 16px 12px;
+
+    ion-select {
+        flex: 1;
+        background: #474a48;
+        color: #ffffff;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+.results {
+    padding: 0 16px 16px;
+}
+
+.no-results {
+    color: #909590;
+    text-align: center;
+    margin-top: 32px;
+}
+
+.movie-card {
+    --background: #474a48;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+    .card-inner {
+        display: flex;
+        gap: 12px;
+    }
+
+    .movie-poster {
+        width: 80px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+
+    .movie-info {
+        flex: 1;
+        padding: 12px 12px 12px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .movie-title {
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .movie-date {
+        color: #909590;
+        font-size: 12px;
+        margin: 0;
+    }
+
+    .genres {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .ratings {
+        display: flex;
+        gap: 6px;
+    }
+}
