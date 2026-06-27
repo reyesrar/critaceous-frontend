@@ -1,0 +1,110 @@
+ion-toolbar {
+    --background: #2c302e;
+    --color: #9ae19d;
+}
+
+ion-content {
+    --background: #2c302e;
+}
+
+.section {
+    padding: 16px;
+}
+
+.section-title {
+    color: #9ae19d;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Horizontal scroll for featured movies */
+.horizontal-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.movie-card {
+    --background: #474a48;
+    min-width: 160px;
+    max-width: 160px;
+    margin: 0;
+    cursor: pointer;
+
+    .movie-poster {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+
+    ion-card-title {
+        color: #ffffff;
+        font-size: 13px;
+    }
+
+    .ratings {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 6px;
+    }
+
+    .genres {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+}
+
+.comment-card {
+    --background: #474a48;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+    .comment-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
+    .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        background: #537a5a;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+        border-radius: 50%;
+    }
+
+    .comment-meta {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        ion-label {
+            color: #ffffff;
+        }
+
+        .movie-title {
+            color: #909590;
+            font-size: 12px;
+        }
+    }
+
+    .comment-content {
+        color: #d0d0d0;
+        font-size: 14px;
+        margin: 0;
+    }
+}

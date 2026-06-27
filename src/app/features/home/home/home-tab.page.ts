@@ -1,19 +1,38 @@
-import { Component } from '@angular/core';
-import { IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {
+  IonContent, IonHeader, IonToolbar, IonTitle,
+  IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+  IonBadge, IonAvatar, IonLabel
+} from '@ionic/angular/standalone';
+import { MovieService } from '../../../core/services/movie.service';
+import { Movie, Comment } from '../../../core/models/movie.model';
 
 @Component({
   selector: 'app-home-tab',
-  template: `
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Critaceous</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <!-- Home content goes here -->
-    </ion-content>
-  `,
+  templateUrl: './home-tab.page.html',
+  styleUrls: ['./home-tab.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonToolbar, IonTitle],
+  imports: [
+    CommonModule,
+    IonContent, IonHeader, IonToolbar, IonTitle,
+    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
+    IonBadge, IonAvatar, IonLabel
+  ],
 })
-export class HomeTabPage {}
+export class HomeTabPage implements OnInit {
+  featured: Movie[] = [];
+  latestComments: Comment[] = [];
+
+  constructor(private movieService: MovieService, private router: Router) {}
+
+  ngOnInit() {
+    this.featured = this.movieService.getFeatured();
+    this.latestComments = this.movieService.getLatestComments();
+  }
+
+  goToDetail(id: string) {
+    this.router.navigate(['/movie', id]);
+  }
+}

@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Critaceous</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <!-- Featured section -->
+    <section class="section">
+        <h2 class="section-title">Featured</h2>
+        <div class="horizontal-scroll">
+            <ion-card *ngFor="let movie of featured" class="movie-card" (click)="goToDetail(movie.id)">
+                <img [src]="movie.poster" [alt]="movie.title" class="movie-poster" />
+                <ion-card-header>
+                    <ion-card-title>{{ movie.title }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <div class="ratings">
+                        <ion-badge color="success">⭐ {{ movie.userRating }}</ion-badge>
+                        <ion-badge color="warning">🎬 {{ movie.criticRating }}</ion-badge>
+                    </div>
+                    <div class="genres">
+                        <ion-badge *ngFor="let genre of movie.genres" color="medium">
+                            {{ genre }}
+                        </ion-badge>
+                    </div>
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </section>
+
+    <!-- Latest comments section -->
+    <section class="section">
+        <h2 class="section-title">Latest Comments</h2>
+        <ion-card *ngFor="let comment of latestComments" class="comment-card" (click)="goToDetail(comment.movieId)">
+            <ion-card-content>
+                <div class="comment-header">
+                    <ion-avatar>
+                        <div class="avatar-placeholder">{{ comment.userName[0] }}</div>
+                    </ion-avatar>
+                    <div class="comment-meta">
+                        <ion-label>
+                            <strong>{{ comment.userName }}</strong>
+                            <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
+                        </ion-label>
+                        <span class="movie-title">{{ comment.movieTitle }}</span>
+                    </div>
+                    <ion-badge color="success">{{ comment.rating }}/10</ion-badge>
+                </div>
+                <p class="comment-content">{{ comment.content }}</p>
+            </ion-card-content>
+        </ion-card>
+    </section>
+
+</ion-content>
