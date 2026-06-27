@@ -1,13 +1,61 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <!-- Avatar and name -->
+  <div class="profile-hero">
+    <ion-avatar class="profile-avatar">
+      <div class="avatar-placeholder">{{ user.name[0] }}</div>
+    </ion-avatar>
+    <h1 class="profile-name">{{ user.name }}</h1>
+    <p class="profile-email">{{ user.email }}</p>
+    <ion-badge [color]="user.role === 'critic' ? 'warning' : 'medium'">
+      {{ user.role | titlecase }}
+    </ion-badge>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-box">
+      <span class="stat-value">{{ user.totalComments }}</span>
+      <span class="stat-label">Comments</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-value">{{ user.avgRating }}</span>
+      <span class="stat-label">Avg Rating</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-value">{{ user.joinedAt | date:'yyyy' }}</span>
+      <span class="stat-label">Since</span>
+    </div>
+  </div>
+
+  <!-- Account info -->
+  <ion-card class="info-card">
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Name</p>
+          <h3>{{ user.name }}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Email</p>
+          <h3>{{ user.email }}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          <p>Member since</p>
+          <h3>{{ user.joinedAt | date:'mediumDate' }}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
