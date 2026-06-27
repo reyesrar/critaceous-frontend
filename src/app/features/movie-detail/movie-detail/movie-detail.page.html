@@ -1,13 +1,68 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>movie-detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/home" />
+    </ion-buttons>
+    <ion-title>{{ movie?.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">movie-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="movie">
+
+  <!-- Poster -->
+  <img [src]="movie.poster" [alt]="movie.title" class="detail-poster" />
+
+  <!-- Info -->
+  <div class="detail-info">
+    <h1 class="detail-title">{{ movie.title }}</h1>
+    <p class="detail-date">{{ movie.releaseDate | date:'mediumDate' }}</p>
+
+    <!-- Genres -->
+    <div class="genres">
+      <ion-badge *ngFor="let genre of movie.genres" color="medium">
+        {{ genre }}
+      </ion-badge>
+    </div>
+
+    <!-- Ratings -->
+    <div class="ratings">
+      <div class="rating-box">
+        <span class="rating-label">Users</span>
+        <span class="rating-value">⭐ {{ movie.userRating }}</span>
+      </div>
+      <div class="rating-box">
+        <span class="rating-label">Critics</span>
+        <span class="rating-value">🎬 {{ movie.criticRating }}</span>
+      </div>
+    </div>
+
+    <!-- Synopsis -->
+    <h2 class="section-title">Synopsis</h2>
+    <p class="synopsis">{{ movie.synopsis }}</p>
+
+    <!-- Comments -->
+    <h2 class="section-title">Comments</h2>
+    <p *ngIf="comments.length === 0" class="no-comments">No comments yet.</p>
+
+    <ion-card *ngFor="let comment of comments" class="comment-card">
+      <ion-card-content>
+        <div class="comment-header">
+          <ion-avatar>
+            <div class="avatar-placeholder">{{ comment.userName[0] }}</div>
+          </ion-avatar>
+          <div class="comment-meta">
+            <ion-label>
+              <strong>{{ comment.userName }}</strong>
+              <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
+            </ion-label>
+            <span class="comment-date">{{ comment.createdAt | date:'mediumDate' }}</span>
+          </div>
+          <ion-badge color="success">{{ comment.rating }}/10</ion-badge>
+        </div>
+        <p class="comment-content">{{ comment.content }}</p>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
 </ion-content>

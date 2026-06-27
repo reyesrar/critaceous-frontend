@@ -1,0 +1,131 @@
+ion-toolbar {
+    --background: #2c302e;
+    --color: #9ae19d;
+}
+
+ion-content {
+    --background: #2c302e;
+}
+
+.detail-poster {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+}
+
+.detail-info {
+    padding: 16px;
+}
+
+.detail-title {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.detail-date {
+    color: #909590;
+    font-size: 13px;
+    margin: 0 0 12px;
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.ratings {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+
+    .rating-box {
+        flex: 1;
+        background: #474a48;
+        border-radius: 10px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .rating-label {
+        color: #909590;
+        font-size: 12px;
+    }
+
+    .rating-value {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+    }
+}
+
+.section-title {
+    color: #9ae19d;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.synopsis {
+    color: #d0d0d0;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.no-comments {
+    color: #909590;
+    font-size: 14px;
+}
+
+.comment-card {
+    --background: #474a48;
+    margin-bottom: 12px;
+
+    .comment-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
+    .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        background: #537a5a;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+        border-radius: 50%;
+    }
+
+    .comment-meta {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        ion-label {
+            color: #ffffff;
+        }
+
+        .comment-date {
+            color: #909590;
+            font-size: 12px;
+        }
+    }
+
+    .comment-content {
+        color: #d0d0d0;
+        font-size: 14px;
+        margin: 0;
+    }
+}

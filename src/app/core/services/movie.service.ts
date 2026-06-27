@@ -96,4 +96,9 @@ export class MovieService {
   getAll(): Movie[] {
     return this.movies;
   }
+
+  getCommentsByMovieId(movieId: string): Comment[] {
+  // Return comments filtered by movie
+  return this.comments.filter((c) => c.movieId === movieId);
+}
 }
