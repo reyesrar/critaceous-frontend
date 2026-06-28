@@ -8,6 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { MovieService } from '../../../core/services/movie.service';
 import { Movie, Comment } from '../../../core/models/movie.model';
+import { RatingBadgeComponent } from '../../../shared/components/rating-badge/rating-badge.component';
 
 @Component({
   selector: 'app-home-tab',
@@ -16,6 +17,7 @@ import { Movie, Comment } from '../../../core/models/movie.model';
   standalone: true,
   imports: [
     CommonModule,
+    RatingBadgeComponent,
     IonContent, IonHeader, IonToolbar, IonTitle,
     IonCard, IonCardHeader, IonCardTitle, IonCardContent,
     IonBadge, IonAvatar, IonLabel

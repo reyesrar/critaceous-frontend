@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import {
   IonContent, IonHeader, IonToolbar, IonTitle,
   IonSearchbar, IonSelect, IonSelectOption,
-  IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonBadge
+  IonCard, IonBadge
 } from '@ionic/angular/standalone';
 import { MovieService } from '../../../core/services/movie.service';
 import { Movie } from '../../../core/models/movie.model';
+import { RatingBadgeComponent } from '../../../shared/components/rating-badge/rating-badge.component';
 
 @Component({
   selector: 'app-explore',
@@ -17,9 +18,10 @@ import { Movie } from '../../../core/models/movie.model';
   standalone: true,
   imports: [
     CommonModule, FormsModule,
+    RatingBadgeComponent,
     IonContent, IonHeader, IonToolbar, IonTitle,
     IonSearchbar, IonSelect, IonSelectOption,
-    IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonBadge
+    IonCard, IonBadge
   ],
 })
 export class ExplorePage implements OnInit {

@@ -5,8 +5,8 @@ export interface Movie {
   synopsis: string;
   releaseDate: string;
   genres: string[];
-  // Cast members
   actors: string[];
+  directors: string[];
   userRating: number;
   criticRating: number;
   popularity: number;

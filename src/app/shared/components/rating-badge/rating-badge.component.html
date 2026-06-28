@@ -1,0 +1,7 @@
+<div class="rating-badge" [class.lg]="size === 'lg'">
+    <img [src]="rating | ratingMascot" [alt]="label" class="mascot-img" />
+    <div class="rating-text">
+        <span class="score">{{ rating }}<span class="out-of">/10</span></span>
+        <span *ngIf="label" class="label">{{ label }}</span>
+    </div>
+</div>

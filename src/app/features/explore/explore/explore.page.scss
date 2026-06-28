@@ -17,16 +17,18 @@ ion-searchbar {
 
 .filters {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
     padding: 0 16px 12px;
 
     ion-select {
         flex: 1;
+        min-width: 120px;
         background: #474a48;
         color: #ffffff;
         border-radius: 8px;
         padding: 8px 12px;
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
@@ -87,6 +89,7 @@ ion-searchbar {
 
     .ratings {
         display: flex;
+        flex-wrap: wrap;
         gap: 6px;
     }
 }

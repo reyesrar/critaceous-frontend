@@ -26,19 +26,23 @@
 
     <!-- Ratings -->
     <div class="ratings">
-      <div class="rating-box">
-        <span class="rating-label">Users</span>
-        <span class="rating-value">⭐ {{ movie.userRating }}</span>
-      </div>
-      <div class="rating-box">
-        <span class="rating-label">Critics</span>
-        <span class="rating-value">🎬 {{ movie.criticRating }}</span>
-      </div>
+      <app-rating-badge [rating]="movie.userRating" label="Users" size="lg" />
+      <app-rating-badge [rating]="movie.criticRating" label="Critics" size="lg" />
     </div>
 
     <!-- Synopsis -->
     <h2 class="section-title">Synopsis</h2>
     <p class="synopsis">{{ movie.synopsis }}</p>
+
+    <!-- Directors -->
+    <h2 class="section-title">
+      {{ movie.directors.length > 1 ? 'Directors' : 'Director' }}
+    </h2>
+    <div class="directors">
+      <ion-badge *ngFor="let director of movie.directors" color="medium">
+        {{ director }}
+      </ion-badge>
+    </div>
 
     <!-- Actors -->
     <h2 class="section-title">Actors</h2>
@@ -48,7 +52,7 @@
       </ion-badge>
     </div>
 
-    <!-- Comments -->
+    <!-- Comments (no movie title shown — implied by context) -->
     <h2 class="section-title">Comments</h2>
     <p *ngIf="comments.length === 0" class="no-comments">No comments yet.</p>
 
@@ -59,13 +63,13 @@
             <div class="avatar-placeholder">{{ comment.userName[0] }}</div>
           </ion-avatar>
           <div class="comment-meta">
-            <ion-label>
-              <strong>{{ comment.userName }}</strong>
+            <div class="user-row">
+              <strong class="user-name">{{ comment.userName }}</strong>
               <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
-            </ion-label>
+            </div>
             <span class="comment-date">{{ comment.createdAt | date:'mediumDate' }}</span>
           </div>
-          <ion-badge color="success">{{ comment.rating }}/10</ion-badge>
+          <app-rating-badge [rating]="comment.rating" />
         </div>
         <p class="comment-content">{{ comment.content }}</p>
       </ion-card-content>

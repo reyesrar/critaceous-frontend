@@ -9,40 +9,83 @@ ion-content {
     height: 100%;
 }
 
-.splash-logo {
+.splash-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    animation: fadeIn 0.8s ease-in;
+    gap: 10px;
+    animation: fadeSlideIn 0.9s ease-out forwards;
 }
 
 .mascot {
-    font-size: 80px;
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    /* Background matches mascot border color */
+    background: #2c302e;
+    animation: float 3s ease-in-out infinite;
 }
 
 .app-name {
-    font-size: 36px;
-    font-weight: 700;
+    font-size: 38px;
+    font-weight: 800;
     color: #9ae19d;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin: 0;
 }
 
 .tagline {
-    font-size: 14px;
+    font-size: 13px;
     color: #909590;
-    margin: 0;
+    letter-spacing: 1px;
+    margin: 0 0 24px;
 }
 
-@keyframes fadeIn {
+.loader {
+    width: 140px;
+    height: 3px;
+    background: #474a48;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.loader-bar {
+    height: 100%;
+    background: #9ae19d;
+    border-radius: 999px;
+    animation: loadProgress 2.3s ease-in-out forwards;
+}
+
+@keyframes fadeSlideIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(24px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes loadProgress {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
     }
 }

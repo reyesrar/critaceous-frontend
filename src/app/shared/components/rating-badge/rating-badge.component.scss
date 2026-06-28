@@ -1,0 +1,60 @@
+.rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #2c302e;
+    border-radius: 8px;
+    padding: 6px 10px;
+
+    .mascot-img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
+    .rating-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .score {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+
+        .out-of {
+            color: #909590;
+            font-size: 11px;
+            font-weight: 400;
+        }
+    }
+
+    .label {
+        color: #909590;
+        font-size: 11px;
+    }
+
+    /* Large variant for movie detail */
+    &.lg {
+        padding: 10px 14px;
+        gap: 12px;
+
+        .mascot-img {
+            width: 56px;
+            height: 56px;
+        }
+
+        .score {
+            font-size: 22px;
+
+            .out-of {
+                font-size: 13px;
+            }
+        }
+
+        .label {
+            font-size: 12px;
+        }
+    }
+}

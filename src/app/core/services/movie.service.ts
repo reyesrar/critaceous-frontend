@@ -9,11 +9,12 @@ export class MovieService {
     {
       id: '1',
       title: 'Dune: Part Two',
-      actors: ['Timothée Chalamet', 'Zendaya', 'Rebecca Ferguson'],
       poster: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
       synopsis: 'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.',
       releaseDate: '2024-03-01',
       genres: ['Sci-Fi', 'Adventure'],
+      actors: ['Timothée Chalamet', 'Zendaya', 'Rebecca Ferguson'],
+      directors: ['Denis Villeneuve'],
       userRating: 8.4,
       criticRating: 8.1,
       popularity: 98.3,
@@ -21,11 +22,12 @@ export class MovieService {
     {
       id: '2',
       title: 'Oppenheimer',
-      actors: ['Cillian Murphy', 'Emily Blunt', 'Matt Damon'],
       poster: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg',
       synopsis: 'The story of J. Robert Oppenheimer and his role in the development of the atomic bomb.',
       releaseDate: '2023-07-21',
       genres: ['Drama', 'History'],
+      actors: ['Cillian Murphy', 'Emily Blunt', 'Matt Damon'],
+      directors: ['Christopher Nolan'],
       userRating: 8.9,
       criticRating: 9.1,
       popularity: 95.1,
@@ -33,11 +35,12 @@ export class MovieService {
     {
       id: '3',
       title: 'Poor Things',
-      actors: ['Emma Stone', 'Mark Ruffalo', 'Willem Dafoe'],
       poster: 'https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXEeSo4DyadwJFk.jpg',
       synopsis: 'The incredible tale about the fantastical evolution of Bella Baxter, a young woman brought back to life.',
       releaseDate: '2023-12-08',
       genres: ['Comedy', 'Romance'],
+      actors: ['Emma Stone', 'Mark Ruffalo', 'Willem Dafoe'],
+      directors: ['Yorgos Lanthimos'],
       userRating: 7.9,
       criticRating: 8.8,
       popularity: 88.7,
@@ -101,7 +104,7 @@ export class MovieService {
   }
 
   getCommentsByMovieId(movieId: string): Comment[] {
-  // Return comments filtered by movie
-  return this.comments.filter((c) => c.movieId === movieId);
-}
+    // Return comments filtered by movie
+    return this.comments.filter((c) => c.movieId === movieId);
+  }
 }

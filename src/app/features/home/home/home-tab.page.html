@@ -17,8 +17,8 @@
                 </ion-card-header>
                 <ion-card-content>
                     <div class="ratings">
-                        <ion-badge color="success">⭐ {{ movie.userRating }}</ion-badge>
-                        <ion-badge color="warning">🎬 {{ movie.criticRating }}</ion-badge>
+                        <app-rating-badge [rating]="movie.userRating" label="Users" />
+                        <app-rating-badge [rating]="movie.criticRating" label="Critics" />
                     </div>
                     <div class="genres">
                         <ion-badge *ngFor="let genre of movie.genres" color="medium">
@@ -40,13 +40,14 @@
                         <div class="avatar-placeholder">{{ comment.userName[0] }}</div>
                     </ion-avatar>
                     <div class="comment-meta">
-                        <ion-label>
-                            <strong>{{ comment.userName }}</strong>
+                        <div class="user-row">
+                            <strong class="user-name">{{ comment.userName }}</strong>
                             <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
-                        </ion-label>
-                        <span class="movie-title">{{ comment.movieTitle }}</span>
+                        </div>
+                        <!-- Movie being reviewed -->
+                        <span class="movie-ref">🎬 {{ comment.movieTitle }}</span>
                     </div>
-                    <ion-badge color="success">{{ comment.rating }}/10</ion-badge>
+                    <app-rating-badge [rating]="comment.rating" />
                 </div>
                 <p class="comment-content">{{ comment.content }}</p>
             </ion-card-content>

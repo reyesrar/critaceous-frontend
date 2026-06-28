@@ -12,7 +12,7 @@
   <!-- Filters row -->
   <div class="filters">
     <ion-select [(ngModel)]="selectedGenre" (ionChange)="applyFilters()" placeholder="Genre" interface="popover">
-      <ion-select-option value="">All genres</ion-select-option>
+      <ion-select-option value="">All Genres</ion-select-option>
       <ion-select-option *ngFor="let g of genres" [value]="g">{{ g }}</ion-select-option>
     </ion-select>
 
@@ -23,15 +23,30 @@
       <ion-select-option value="releaseDate">Release Date</ion-select-option>
     </ion-select>
 
-    <ion-select [(ngModel)]="minUserRating" (ionChange)="applyFilters()" placeholder="Min User ⭐" interface="popover">
-      <ion-select-option [value]="0">Any rating</ion-select-option>
+    <!-- User rating filter -->
+    <ion-select [(ngModel)]="minUserRating" (ionChange)="applyFilters()" placeholder="User Rating" interface="popover">
+      <ion-select-option [value]="0">Any User Rating</ion-select-option>
+      <ion-select-option [value]="1">1+</ion-select-option>
+      <ion-select-option [value]="2">2+</ion-select-option>
+      <ion-select-option [value]="3">3+</ion-select-option>
+      <ion-select-option [value]="4">4+</ion-select-option>
+      <ion-select-option [value]="5">5+</ion-select-option>
+      <ion-select-option [value]="6">6+</ion-select-option>
       <ion-select-option [value]="7">7+</ion-select-option>
       <ion-select-option [value]="8">8+</ion-select-option>
       <ion-select-option [value]="9">9+</ion-select-option>
     </ion-select>
-    
-    <ion-select [(ngModel)]="minCriticRating" (ionChange)="applyFilters()" placeholder="Min Critic 🎬" interface="popover">
-      <ion-select-option [value]="0">Any rating</ion-select-option>
+
+    <!-- Critic rating filter -->
+    <ion-select [(ngModel)]="minCriticRating" (ionChange)="applyFilters()" placeholder="Critic Rating"
+      interface="popover">
+      <ion-select-option [value]="0">Any Critic Rating</ion-select-option>
+      <ion-select-option [value]="1">1+</ion-select-option>
+      <ion-select-option [value]="2">2+</ion-select-option>
+      <ion-select-option [value]="3">3+</ion-select-option>
+      <ion-select-option [value]="4">4+</ion-select-option>
+      <ion-select-option [value]="5">5+</ion-select-option>
+      <ion-select-option [value]="6">6+</ion-select-option>
       <ion-select-option [value]="7">7+</ion-select-option>
       <ion-select-option [value]="8">8+</ion-select-option>
       <ion-select-option [value]="9">9+</ion-select-option>
@@ -52,8 +67,8 @@
             <ion-badge *ngFor="let g of movie.genres" color="medium">{{ g }}</ion-badge>
           </div>
           <div class="ratings">
-            <ion-badge color="success">⭐ {{ movie.userRating }}</ion-badge>
-            <ion-badge color="warning">🎬 {{ movie.criticRating }}</ion-badge>
+            <app-rating-badge [rating]="movie.userRating" label="Users" />
+            <app-rating-badge [rating]="movie.criticRating" label="Critics" />
           </div>
         </div>
       </div>
