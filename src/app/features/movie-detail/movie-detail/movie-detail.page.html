@@ -7,74 +7,78 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="movie">
+<ion-content>
+  <div *ngIf="loading" class="loading"><ion-spinner name="crescent" /></div>
 
-  <!-- Poster -->
-  <img [src]="movie.poster" [alt]="movie.title" class="detail-poster" />
+  <ng-container *ngIf="!loading && movie">
+    <img [src]="movie.poster" [alt]="movie.title" class="detail-poster" />
 
-  <!-- Info -->
-  <div class="detail-info">
-    <h1 class="detail-title">{{ movie.title }}</h1>
-    <p class="detail-date">{{ movie.releaseDate | date:'mediumDate' }}</p>
+    <div class="detail-info">
+      <h1 class="detail-title">{{ movie.title }}</h1>
+      <p class="detail-date">{{ movie.releaseDate | date:'mediumDate' }}</p>
 
-    <!-- Genres -->
-    <div class="genres">
-      <ion-badge *ngFor="let genre of movie.genres" color="medium">
-        {{ genre }}
-      </ion-badge>
-    </div>
+      <div class="genres">
+        <ion-badge *ngFor="let genre of movie.genres" color="medium">{{ genre }}</ion-badge>
+      </div>
 
-    <!-- Ratings -->
-    <div class="ratings">
-      <app-rating-badge [rating]="movie.userRating" label="Users" size="lg" />
-      <app-rating-badge [rating]="movie.criticRating" label="Critics" size="lg" />
-    </div>
+      <div class="ratings">
+        <app-rating-badge [rating]="movie.userRating" label="Users" size="lg" />
+        <app-rating-badge [rating]="movie.criticRating" label="Critics" size="lg" />
+      </div>
 
-    <!-- Synopsis -->
-    <h2 class="section-title">Synopsis</h2>
-    <p class="synopsis">{{ movie.synopsis }}</p>
+      <h2 class="section-title">Synopsis</h2>
+      <p class="synopsis">{{ movie.synopsis }}</p>
 
-    <!-- Directors -->
-    <h2 class="section-title">
-      {{ movie.directors.length > 1 ? 'Directors' : 'Director' }}
-    </h2>
-    <div class="directors">
-      <ion-badge *ngFor="let director of movie.directors" color="medium">
-        {{ director }}
-      </ion-badge>
-    </div>
+      <h2 class="section-title">{{ movie.directors?.length > 1 ? 'Directors' : 'Director' }}</h2>
+      <div class="directors">
+        <ion-badge *ngFor="let d of movie.directors" color="medium">{{ d }}</ion-badge>
+      </div>
 
-    <!-- Actors -->
-    <h2 class="section-title">Actors</h2>
-    <div class="actors">
-      <ion-badge *ngFor="let actor of movie.actors" color="medium">
-        {{ actor }}
-      </ion-badge>
-    </div>
+      <h2 class="section-title">Actors</h2>
+      <div class="actors">
+        <ion-badge *ngFor="let a of movie.actors" color="medium">{{ a }}</ion-badge>
+      </div>
 
-    <!-- Comments (no movie title shown — implied by context) -->
-    <h2 class="section-title">Comments</h2>
-    <p *ngIf="comments.length === 0" class="no-comments">No comments yet.</p>
+      <!-- Add comment -->
+      <h2 class="section-title">Leave a Comment</h2>
+      <div class="comment-form">
+        <ion-item>
+          <ion-label position="floating">Your review</ion-label>
+          <ion-textarea [(ngModel)]="newComment" rows="3" />
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Rating (1-10)</ion-label>
+          <ion-input type="number" [(ngModel)]="newRating" min="1" max="10" />
+        </ion-item>
+        <ion-button expand="block" (click)="submitComment()" [disabled]="submitting">
+          <ion-spinner *ngIf="submitting" name="crescent" />
+          <span *ngIf="!submitting">Submit</span>
+        </ion-button>
+      </div>
 
-    <ion-card *ngFor="let comment of comments" class="comment-card">
-      <ion-card-content>
-        <div class="comment-header">
-          <ion-avatar>
-            <div class="avatar-placeholder">{{ comment.userName[0] }}</div>
-          </ion-avatar>
-          <div class="comment-meta">
-            <div class="user-row">
-              <strong class="user-name">{{ comment.userName }}</strong>
-              <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
+      <!-- Comments list -->
+      <h2 class="section-title">Comments</h2>
+      <p *ngIf="comments.length === 0" class="no-comments">No comments yet.</p>
+
+      <ion-card *ngFor="let comment of comments" class="comment-card">
+        <ion-card-content>
+          <div class="comment-header">
+            <ion-avatar>
+              <div class="avatar-placeholder">{{ comment.user?.name?.[0] }}</div>
+            </ion-avatar>
+            <div class="comment-meta">
+              <div class="user-row">
+                <strong class="user-name">{{ comment.user?.name }}</strong>
+                <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
+              </div>
+              <span class="comment-date">{{ comment.createdAt | date:'mediumDate' }}</span>
             </div>
-            <span class="comment-date">{{ comment.createdAt | date:'mediumDate' }}</span>
+            <app-rating-badge [rating]="comment.rating" />
           </div>
-          <app-rating-badge [rating]="comment.rating" />
-        </div>
-        <p class="comment-content">{{ comment.content }}</p>
-      </ion-card-content>
-    </ion-card>
+          <p class="comment-content">{{ comment.content }}</p>
+        </ion-card-content>
+      </ion-card>
 
-  </div>
-
+    </div>
+  </ng-container>
 </ion-content>

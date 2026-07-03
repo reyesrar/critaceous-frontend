@@ -5,12 +5,10 @@
 </ion-header>
 
 <ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearch()" placeholder="Search movies on TMDB..."
+    debounce="400" />
 
-  <!-- Search bar -->
-  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="applyFilters()" placeholder="Search movies..." debounce="300" />
-
-  <!-- Filters row -->
-  <div class="filters">
+  <div class="filters" *ngIf="!searchingTMDB">
     <ion-select [(ngModel)]="selectedGenre" (ionChange)="applyFilters()" placeholder="Genre" interface="popover">
       <ion-select-option value="">All Genres</ion-select-option>
       <ion-select-option *ngFor="let g of genres" [value]="g">{{ g }}</ion-select-option>
@@ -23,50 +21,33 @@
       <ion-select-option value="releaseDate">Release Date</ion-select-option>
     </ion-select>
 
-    <!-- User rating filter -->
     <ion-select [(ngModel)]="minUserRating" (ionChange)="applyFilters()" placeholder="User Rating" interface="popover">
       <ion-select-option [value]="0">Any User Rating</ion-select-option>
-      <ion-select-option [value]="1">1+</ion-select-option>
-      <ion-select-option [value]="2">2+</ion-select-option>
-      <ion-select-option [value]="3">3+</ion-select-option>
-      <ion-select-option [value]="4">4+</ion-select-option>
-      <ion-select-option [value]="5">5+</ion-select-option>
-      <ion-select-option [value]="6">6+</ion-select-option>
-      <ion-select-option [value]="7">7+</ion-select-option>
-      <ion-select-option [value]="8">8+</ion-select-option>
-      <ion-select-option [value]="9">9+</ion-select-option>
+      <ion-select-option *ngFor="let n of [1,2,3,4,5,6,7,8,9]" [value]="n">{{ n }}+</ion-select-option>
     </ion-select>
 
-    <!-- Critic rating filter -->
     <ion-select [(ngModel)]="minCriticRating" (ionChange)="applyFilters()" placeholder="Critic Rating"
       interface="popover">
       <ion-select-option [value]="0">Any Critic Rating</ion-select-option>
-      <ion-select-option [value]="1">1+</ion-select-option>
-      <ion-select-option [value]="2">2+</ion-select-option>
-      <ion-select-option [value]="3">3+</ion-select-option>
-      <ion-select-option [value]="4">4+</ion-select-option>
-      <ion-select-option [value]="5">5+</ion-select-option>
-      <ion-select-option [value]="6">6+</ion-select-option>
-      <ion-select-option [value]="7">7+</ion-select-option>
-      <ion-select-option [value]="8">8+</ion-select-option>
-      <ion-select-option [value]="9">9+</ion-select-option>
+      <ion-select-option *ngFor="let n of [1,2,3,4,5,6,7,8,9]" [value]="n">{{ n }}+</ion-select-option>
     </ion-select>
   </div>
 
-  <!-- Results -->
-  <div class="results">
-    <p *ngIf="filtered.length === 0" class="no-results">No movies found.</p>
+  <div *ngIf="loading" class="loading"><ion-spinner name="crescent" /></div>
 
-    <ion-card *ngFor="let movie of filtered" class="movie-card" (click)="goToDetail(movie.id)">
+  <div class="results" *ngIf="!loading">
+    <p *ngIf="results.length === 0" class="no-results">No movies found.</p>
+    <ion-card *ngFor="let movie of results" class="movie-card" (click)="goToDetail(movie)">
       <div class="card-inner">
-        <img [src]="movie.poster" [alt]="movie.title" class="movie-poster" />
+        <img [src]="movie.poster || 'https://image.tmdb.org/t/p/w500' + movie.poster_path" [alt]="movie.title"
+          class="movie-poster" />
         <div class="movie-info">
           <h3 class="movie-title">{{ movie.title }}</h3>
-          <p class="movie-date">{{ movie.releaseDate | date:'yyyy' }}</p>
+          <p class="movie-date">{{ (movie.releaseDate || movie.release_date) | date:'yyyy' }}</p>
           <div class="genres">
-            <ion-badge *ngFor="let g of movie.genres" color="medium">{{ g }}</ion-badge>
+            <ion-badge *ngFor="let g of (movie.genres || [])" color="medium">{{ g }}</ion-badge>
           </div>
-          <div class="ratings">
+          <div class="ratings" *ngIf="!searchingTMDB">
             <app-rating-badge [rating]="movie.userRating" label="Users" />
             <app-rating-badge [rating]="movie.criticRating" label="Critics" />
           </div>
@@ -74,5 +55,4 @@
       </div>
     </ion-card>
   </div>
-
 </ion-content>

@@ -5,10 +5,9 @@ import { Router } from '@angular/router';
 import {
   IonContent, IonHeader, IonToolbar, IonTitle,
   IonSearchbar, IonSelect, IonSelectOption,
-  IonCard, IonBadge
+  IonCard, IonBadge, IonSpinner
 } from '@ionic/angular/standalone';
-import { MovieService } from '../../../core/services/movie.service';
-import { Movie } from '../../../core/models/movie.model';
+import { ApiService } from '../../../core/services/api.service';
 import { RatingBadgeComponent } from '../../../shared/components/rating-badge/rating-badge.component';
 
 @Component({
@@ -17,74 +16,72 @@ import { RatingBadgeComponent } from '../../../shared/components/rating-badge/ra
   styleUrls: ['./explore.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, FormsModule,
-    RatingBadgeComponent,
+    CommonModule, FormsModule, RatingBadgeComponent,
     IonContent, IonHeader, IonToolbar, IonTitle,
     IonSearchbar, IonSelect, IonSelectOption,
-    IonCard, IonBadge
+    IonCard, IonBadge, IonSpinner
   ],
 })
 export class ExplorePage implements OnInit {
-  allMovies: Movie[] = [];
-  filtered: Movie[] = [];
-
+  results: any[] = [];
   searchTerm = '';
   selectedGenre = '';
   sortBy = 'popularity';
   minUserRating = 0;
   minCriticRating = 0;
-
   genres: string[] = [];
+  loading = false;
+  // Track if user is searching TMDB or browsing local DB
+  searchingTMDB = false;
 
-  constructor(private movieService: MovieService, private router: Router) {}
+  constructor(private api: ApiService, private router: Router) {}
 
-  ngOnInit() {
-    this.allMovies = this.movieService.getAll();
-    this.extractGenres();
-    this.applyFilters();
+  async ngOnInit() {
+    await this.loadLocal();
+  }
+
+  async loadLocal() {
+    this.loading = true;
+    try {
+      this.results = await this.api.getAllMovies({
+        genre: this.selectedGenre,
+        sortBy: this.sortBy,
+        minUserRating: this.minUserRating,
+        minCriticRating: this.minCriticRating,
+      });
+      this.extractGenres();
+      this.searchingTMDB = false;
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  async onSearch() {
+    if (!this.searchTerm.trim()) { await this.loadLocal(); return; }
+    this.loading = true;
+    try {
+      // Search TMDB for broader results
+      this.results = await this.api.searchMovies(this.searchTerm);
+      this.searchingTMDB = true;
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  async applyFilters() {
+    this.searchTerm = '';
+    await this.loadLocal();
   }
 
   extractGenres() {
-    // Build unique genre list from all movies
-    const genreSet = new Set<string>();
-    this.allMovies.forEach((m) => m.genres.forEach((g) => genreSet.add(g)));
-    this.genres = Array.from(genreSet).sort();
+    const set = new Set<string>();
+    this.results.forEach((m: any) => m.genres?.forEach((g: string) => set.add(g)));
+    this.genres = Array.from(set).sort();
   }
 
-  applyFilters() {
-    let result = [...this.allMovies];
-
-    if (this.searchTerm.trim()) {
-      result = result.filter((m) =>
-        m.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    }
-
-    if (this.selectedGenre) {
-      result = result.filter((m) => m.genres.includes(this.selectedGenre));
-    }
-
-    // Filter by minimum user rating
-    if (this.minUserRating > 0) {
-      result = result.filter((m) => m.userRating >= this.minUserRating);
-    }
-
-    // Filter by minimum critic rating
-    if (this.minCriticRating > 0) {
-      result = result.filter((m) => m.criticRating >= this.minCriticRating);
-    }
-
-    result.sort((a, b) => {
-      if (this.sortBy === 'userRating') return b.userRating - a.userRating;
-      if (this.sortBy === 'criticRating') return b.criticRating - a.criticRating;
-      if (this.sortBy === 'releaseDate') return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
-      return b.popularity - a.popularity;
-    });
-
-    this.filtered = result;
-  }
-
-  goToDetail(id: string) {
+  goToDetail(movie: any) {
+    // TMDB results use 'id', local DB uses 'tmdbId'
+    const id = movie.tmdbId ?? String(movie.id);
     this.router.navigate(['/movie', id]);
   }
 }
