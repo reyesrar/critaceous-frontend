@@ -5,53 +5,59 @@
 </ion-header>
 
 <ion-content>
+    <div *ngIf="loading" class="loading">
+        <ion-spinner name="crescent" />
+    </div>
 
-    <!-- Featured section -->
-    <section class="section">
-        <h2 class="section-title">Featured</h2>
-        <div class="horizontal-scroll">
-            <ion-card *ngFor="let movie of featured" class="movie-card" (click)="goToDetail(movie.id)">
-                <img [src]="movie.poster" [alt]="movie.title" class="movie-poster" />
-                <ion-card-header>
-                    <ion-card-title>{{ movie.title }}</ion-card-title>
-                </ion-card-header>
+    <ng-container *ngIf="!loading">
+
+        <!-- Featured -->
+        <section class="section">
+            <h2 class="section-title">Featured</h2>
+            <p *ngIf="featured.length === 0" class="empty">No movies yet. Be the first to comment!</p>
+            <div class="horizontal-scroll">
+                <ion-card *ngFor="let movie of featured" class="movie-card" (click)="goToDetail(movie.tmdbId)">
+                    <img [src]="movie.poster" [alt]="movie.title" class="movie-poster" />
+                    <ion-card-header>
+                        <ion-card-title>{{ movie.title }}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <div class="ratings">
+                            <app-rating-badge [rating]="movie.userRating" label="Users" />
+                            <app-rating-badge [rating]="movie.criticRating" label="Critics" />
+                        </div>
+                        <div class="genres">
+                            <ion-badge *ngFor="let genre of movie.genres" color="medium">{{ genre }}</ion-badge>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+        </section>
+
+        <!-- Latest Comments -->
+        <section class="section">
+            <h2 class="section-title">Latest Comments</h2>
+            <p *ngIf="latestComments.length === 0" class="empty">No comments yet.</p>
+            <ion-card *ngFor="let comment of latestComments" class="comment-card"
+                (click)="goToDetail(comment.movie?.tmdbId)">
                 <ion-card-content>
-                    <div class="ratings">
-                        <app-rating-badge [rating]="movie.userRating" label="Users" />
-                        <app-rating-badge [rating]="movie.criticRating" label="Critics" />
+                    <div class="comment-header">
+                        <ion-avatar>
+                            <div class="avatar-placeholder">{{ comment.user?.name?.[0] }}</div>
+                        </ion-avatar>
+                        <div class="comment-meta">
+                            <div class="user-row">
+                                <strong class="user-name">{{ comment.user?.name }}</strong>
+                                <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
+                            </div>
+                            <span class="movie-ref">🎬 {{ comment.movie?.title }}</span>
+                        </div>
+                        <app-rating-badge [rating]="comment.rating" />
                     </div>
-                    <div class="genres">
-                        <ion-badge *ngFor="let genre of movie.genres" color="medium">
-                            {{ genre }}
-                        </ion-badge>
-                    </div>
+                    <p class="comment-content">{{ comment.content }}</p>
                 </ion-card-content>
             </ion-card>
-        </div>
-    </section>
+        </section>
 
-    <!-- Latest comments section -->
-    <section class="section">
-        <h2 class="section-title">Latest Comments</h2>
-        <ion-card *ngFor="let comment of latestComments" class="comment-card" (click)="goToDetail(comment.movieId)">
-            <ion-card-content>
-                <div class="comment-header">
-                    <ion-avatar>
-                        <div class="avatar-placeholder">{{ comment.userName[0] }}</div>
-                    </ion-avatar>
-                    <div class="comment-meta">
-                        <div class="user-row">
-                            <strong class="user-name">{{ comment.userName }}</strong>
-                            <ion-badge *ngIf="comment.isCritic" color="warning">Critic</ion-badge>
-                        </div>
-                        <!-- Movie being reviewed -->
-                        <span class="movie-ref">🎬 {{ comment.movieTitle }}</span>
-                    </div>
-                    <app-rating-badge [rating]="comment.rating" />
-                </div>
-                <p class="comment-content">{{ comment.content }}</p>
-            </ion-card-content>
-        </ion-card>
-    </section>
-
+    </ng-container>
 </ion-content>
