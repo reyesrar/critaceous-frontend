@@ -56,8 +56,8 @@ export class MovieDetailPage implements OnInit {
     if (!this.newComment.trim()) return;
     this.submitting = true;
     try {
-      await this.api.createComment(this.tmdbId, this.newComment, this.newRating);
-      // Reload comments and movie ratings after submission
+      // Parse rating as number to avoid string submission
+      await this.api.createComment(this.tmdbId, this.newComment, Number(this.newRating));
       [this.movie, this.comments] = await Promise.all([
         this.api.getMovie(this.tmdbId),
         this.api.getCommentsByMovie(this.tmdbId),
