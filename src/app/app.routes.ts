@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -7,26 +8,23 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    // Splash screen before auth
     path: 'splash',
     loadComponent: () =>
       import('./features/auth/splash/splash.page').then((m) => m.SplashPage),
   },
   {
-    // Login screen
     path: 'login',
     loadComponent: () =>
       import('./features/auth/login/login.page').then((m) => m.LoginPage),
   },
   {
-    // Register screen
     path: 'register',
     loadComponent: () =>
       import('./features/auth/register/register.page').then((m) => m.RegisterPage),
   },
   {
-    // Tabs container
     path: 'app',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/home/home/home.page').then((m) => m.HomePage),
     children: [
@@ -58,8 +56,8 @@ export const routes: Routes = [
     ],
   },
   {
-    // Movie detail (outside tabs)
-    path: 'movie/:id',
+    path: 'movie/:tmdbId',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/movie-detail/movie-detail/movie-detail.page').then((m) => m.MovieDetailPage),
   },
