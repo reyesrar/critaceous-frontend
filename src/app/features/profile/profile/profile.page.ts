@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonContent, IonHeader, IonToolbar, IonTitle,
-  IonAvatar, IonBadge, IonCard, IonCardContent, IonItem, IonLabel
+  IonAvatar, IonBadge, IonCard, IonCardContent,
+  IonItem, IonLabel, IonButton, IonSpinner
 } from '@ionic/angular/standalone';
+import { ApiService } from '../../../core/services/api.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,18 +16,30 @@ import {
   imports: [
     CommonModule,
     IonContent, IonHeader, IonToolbar, IonTitle,
-    IonAvatar, IonBadge, IonCard, IonCardContent, IonItem, IonLabel
+    IonAvatar, IonBadge, IonCard, IonCardContent,
+    IonItem, IonLabel, IonButton, IonSpinner
   ],
 })
-export class ProfilePage {
-  // TODO: replace with real user from auth service
-  user = {
-    name: 'John Doe',
-    email: 'john@example.com',
-    // Account type: user | critic | admin
-    role: 'critic',
-    joinedAt: '2024-01-15',
-    totalComments: 24,
-    avgRating: 7.8,
-  };
+export class ProfilePage implements OnInit {
+  user: any;
+  loading = true;
+
+  constructor(private api: ApiService, private auth: AuthService) {}
+
+  async ngOnInit() {
+    try {
+      this.user = await this.api.getMe();
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  async switchRole() {
+    const res = await this.api.switchRole();
+    this.user.role = res.role;
+  }
+
+  async logout() {
+    await this.auth.logout();
+  }
 }

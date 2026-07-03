@@ -7,6 +7,12 @@ ion-content {
     --background: #2c302e;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 48px;
+}
+
 .profile-hero {
     display: flex;
     flex-direction: column;
@@ -81,7 +87,6 @@ ion-content {
 
     ion-item {
         --background: transparent;
-        --color: #ffffff;
 
         p {
             color: #909590;
@@ -92,5 +97,21 @@ ion-content {
             color: #ffffff;
             font-size: 15px;
         }
+    }
+}
+
+.actions {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    ion-button[fill="outline"] {
+        --color: #9ae19d;
+        --border-color: #9ae19d;
+    }
+
+    ion-button[color="danger"] {
+        --color: #ff6b6b;
     }
 }
