@@ -1,6 +1,5 @@
 <ion-content>
   <div class="register-container">
-
     <div class="brand">
       <img src="assets/mascot/mascot.png" alt="Critaceous mascot" class="mascot" />
       <h1 class="app-name">Create Account</h1>
@@ -27,14 +26,16 @@
         <ion-input type="password" [(ngModel)]="confirmPassword" />
       </ion-item>
 
-      <ion-button expand="block" (click)="onRegister()">
-        Register
+      <p *ngIf="error" class="error">{{ error }}</p>
+
+      <ion-button expand="block" (click)="onRegister()" [disabled]="loading">
+        <ion-spinner *ngIf="loading" name="crescent" />
+        <span *ngIf="!loading">Register</span>
       </ion-button>
 
       <ion-button expand="block" fill="clear" (click)="goToLogin()">
         Already have an account? Log In
       </ion-button>
     </div>
-
   </div>
 </ion-content>
