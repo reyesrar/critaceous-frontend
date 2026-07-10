@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Critaceous</string>
+    <string name="title_activity_main">Critaceous</string>
+    <string name="package_name">com.critaceous.app</string>
+    <string name="custom_url_scheme">com.critaceous.app</string>
+</resources>
