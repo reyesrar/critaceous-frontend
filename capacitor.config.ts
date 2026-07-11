@@ -1,11 +1,15 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  // App identifier for stores
   appId: 'com.critaceous.app',
-  // Display name on device
   appName: 'Critaceous',
-  webDir: 'www'
+  webDir: 'www',
+  plugins: {
+    CapacitorHttp: {
+      // Disable native HTTP interceptor to allow Angular HttpClient
+      enabled: false,
+    },
+  },
 };
 
 export default config;
