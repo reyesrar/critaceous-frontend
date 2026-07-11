@@ -13,6 +13,9 @@
         <img *ngIf="user.profilePicture" [src]="user.profilePicture" />
         <div *ngIf="!user.profilePicture" class="avatar-placeholder">{{ user.name[0] }}</div>
       </ion-avatar>
+      <ion-button fill="clear" size="small" (click)="uploadPicture()">
+        Change Photo
+      </ion-button>
       <h1 class="profile-name">{{ user.name }}</h1>
       <p class="profile-email">{{ user.email }}</p>
       <ion-badge [color]="user.role === 'critic' ? 'warning' : 'medium'">

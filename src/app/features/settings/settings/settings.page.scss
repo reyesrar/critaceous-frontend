@@ -15,6 +15,10 @@ ion-content {
     letter-spacing: 1px;
     padding: 16px 16px 4px;
     margin: 0;
+
+    &.danger {
+        color: #ff6b6b;
+    }
 }
 
 .settings-card {
@@ -33,8 +37,17 @@ ion-content {
     ion-select {
         color: #9ae19d;
     }
+}
 
-    ion-toggle {
-        --track-background-checked: #537a5a;
+.danger-card {
+    ion-item {
+        h3 {
+            color: #ff6b6b;
+        }
+
+        p {
+            color: #909590;
+            font-size: 12px;
+        }
     }
 }

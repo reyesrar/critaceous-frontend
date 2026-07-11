@@ -42,4 +42,17 @@ export class ProfilePage implements OnInit {
   async logout() {
     await this.auth.logout();
   }
+
+  async uploadPicture() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const res = await this.api.uploadProfilePicture(file);
+      this.user.profilePicture = res.url;
+    };
+    input.click();
+  }
 }

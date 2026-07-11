@@ -63,4 +63,8 @@ export class ApiService {
   switchRole() {
     return firstValueFrom(this.http.patch<{ role: string }>(`${API}/users/me/role`, {}));
   }
+
+  deleteMe() {
+    return firstValueFrom(this.http.delete(`${API}/users/me`));
+  }
 }

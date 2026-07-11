@@ -43,7 +43,10 @@
                 <ion-card-content>
                     <div class="comment-header">
                         <ion-avatar>
-                            <div class="avatar-placeholder">{{ comment.user?.name?.[0] }}</div>
+                            <img *ngIf="comment.user?.profilePicture" [src]="comment.user.profilePicture" />
+                            <div *ngIf="!comment.user?.profilePicture" class="avatar-placeholder">
+                                {{ comment.user?.name?.[0] }}
+                            </div>
                         </ion-avatar>
                         <div class="comment-meta">
                             <div class="user-row">
