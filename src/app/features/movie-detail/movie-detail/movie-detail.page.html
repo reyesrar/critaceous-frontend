@@ -51,7 +51,8 @@
       <h2 class="section-title">{{ isEditing ? 'Edit Your Review' : 'Leave a Review' }}</h2>
       <div class="comment-form">
         <textarea class="comment-textarea" [(ngModel)]="newComment" placeholder="Write your review..."
-          rows="3"></textarea>
+          rows="3" maxlength="250"></textarea>
+        <div class="char-count">{{ newComment?.length || 0 }}/250</div>
 
         <!-- Rating slider with 0.5 increments -->
         <div class="rating-slider-row">

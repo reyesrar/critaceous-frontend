@@ -139,6 +139,14 @@ ion-content {
         }
     }
 
+    .char-count {
+        color: #909590;
+        font-size: 12px;
+        text-align: right;
+        margin-top: -8px;
+        margin-bottom: 4px;
+    }
+
     /* Rating slider row */
     .rating-slider-row {
         display: flex;

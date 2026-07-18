@@ -24,7 +24,7 @@
                             <app-rating-badge [rating]="movie.criticRating" label="Critics" />
                         </div>
                         <div class="genres">
-                            <ion-badge *ngFor="let genre of movie.genres" color="medium">{{ genre }}</ion-badge>
+                            <ion-badge *ngFor="let genre of (movie.genres || []) | slice:0:2" color="medium">{{ genre }}</ion-badge>
                         </div>
                     </ion-card-content>
                 </ion-card>

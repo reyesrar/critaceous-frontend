@@ -59,7 +59,7 @@
           <h3 class="movie-title">{{ movie.title }}</h3>
           <p class="movie-date">{{ (movie.releaseDate || movie.release_date) | date:'yyyy' }}</p>
           <div class="genres">
-            <ion-badge *ngFor="let g of (movie.genres || [])" color="medium">{{ g }}</ion-badge>
+            <ion-badge *ngFor="let g of (movie.genres || []) | slice:0:2" color="medium">{{ g }}</ion-badge>
           </div>
           <div class="ratings" *ngIf="!searchingTMDB">
             <app-rating-badge [rating]="movie.userRating" label="Users" />

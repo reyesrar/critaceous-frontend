@@ -68,6 +68,10 @@ export class MovieDetailPage implements OnInit {
 
   async submitComment() {
     if (!this.newComment.trim()) return;
+    // Enforce maximum comment length of 250 characters
+    if ((this.newComment || '').length > 250) {
+      this.newComment = this.newComment.slice(0, 250);
+    }
     // Validate rating bounds
     if (this.newRating < 1 || this.newRating > 10) return;
     this.submitting = true;
