@@ -1,17 +1,14 @@
 .rating-badge {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px;
     background: #2c302e;
     border-radius: 8px;
     padding: 6px 10px;
-
-    .mascot-img {
-        width: 32px;
-        height: 32px;
-        object-fit: contain;
-    }
-
+    width: 134px;
+    min-width: 134px;
+    max-width: 134px;
     .rating-text {
         display: flex;
         flex-direction: column;
@@ -39,6 +36,9 @@
     &.lg {
         padding: 10px 14px;
         gap: 12px;
+        width: 170px;
+        min-width: 170px;
+        max-width: 170px;
 
         .mascot-img {
             width: 56px;

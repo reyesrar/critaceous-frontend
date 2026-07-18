@@ -82,11 +82,13 @@ ion-searchbar {
     .card-inner {
         display: flex;
         gap: 12px;
+        align-items: stretch;
     }
 
     .movie-poster {
-        width: 80px;
-        height: 120px;
+        width: 90px;
+        min-height: 160px;
+        height: 100%;
         object-fit: cover;
         border-radius: 6px;
         flex-shrink: 0;
@@ -97,8 +99,9 @@ ion-searchbar {
         padding: 12px 12px 12px 0;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         gap: 6px;
-        min-height: 120px;
+        min-height: 160px;
     }
 
     .movie-title {
