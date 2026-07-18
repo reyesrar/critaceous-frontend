@@ -76,22 +76,23 @@ ion-content {
         display: flex;
         flex-direction: column;
         gap: 6px;
-        height: 100%;
+        padding-top: 8px;
+        padding-bottom: 10px;
     }
 
     .ratings {
         display: flex;
         flex-direction: column;
         gap: 4px;
-        margin-top: auto;
+        margin-top: 4px;
         margin-bottom: 0;
-        align-items: stretch;
+        align-items: flex-start;
         flex-wrap: nowrap;
 
         ::ng-deep .rating-badge {
-            width: 86px;
-            min-width: 86px;
-            max-width: 86px;
+            width: 84px;
+            min-width: 84px;
+            max-width: 84px;
             padding: 3px 6px;
             gap: 4px;
         }
