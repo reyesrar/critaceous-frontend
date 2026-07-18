@@ -86,8 +86,8 @@ ion-searchbar {
     }
 
     .movie-poster {
-        width: 90px;
-        min-height: 160px;
+        width: 88px;
+        min-height: 150px;
         height: 100%;
         object-fit: cover;
         border-radius: 6px;
@@ -96,12 +96,12 @@ ion-searchbar {
 
     .movie-info {
         flex: 1;
-        padding: 12px 12px 12px 0;
+        padding: 10px 8px 10px 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         gap: 6px;
-        min-height: 160px;
+        min-height: 150px;
     }
 
     .movie-title {
@@ -125,7 +125,9 @@ ion-searchbar {
 
     .ratings {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        align-items: center;
         gap: 6px;
+        margin-top: 2px;
     }
 }

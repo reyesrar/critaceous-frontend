@@ -2,59 +2,71 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 6px;
     background: #2c302e;
     border-radius: 8px;
-    padding: 6px 10px;
-    width: 134px;
-    min-width: 134px;
-    max-width: 134px;
+    padding: 4px 7px;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    white-space: nowrap;
+
+    .mascot-img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
     .rating-text {
         display: flex;
         flex-direction: column;
-        line-height: 1.2;
+        line-height: 1.1;
+        min-width: 0;
     }
 
     .score {
         color: #ffffff;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 700;
 
         .out-of {
             color: #909590;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 400;
         }
     }
 
     .label {
         color: #909590;
-        font-size: 11px;
+        font-size: 10px;
     }
 
     /* Large variant for movie detail */
     &.lg {
-        padding: 10px 14px;
-        gap: 12px;
-        width: 170px;
-        min-width: 170px;
-        max-width: 170px;
+        padding: 6px 8px;
+        gap: 8px;
+        width: 118px;
+        min-width: 118px;
+        max-width: 118px;
 
         .mascot-img {
-            width: 56px;
-            height: 56px;
+            width: 34px;
+            height: 34px;
         }
 
         .score {
-            font-size: 22px;
+            font-size: 14px;
 
             .out-of {
-                font-size: 13px;
+                font-size: 10px;
             }
         }
 
         .label {
-            font-size: 12px;
+            font-size: 10px;
         }
     }
 }
