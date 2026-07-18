@@ -5,13 +5,10 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="loading" class="loading">
-        <ion-spinner name="crescent" />
-    </div>
+    <div *ngIf="loading" class="loading"><ion-spinner name="crescent" /></div>
 
     <ng-container *ngIf="!loading">
 
-        <!-- Featured -->
         <section class="section">
             <h2 class="section-title">Featured</h2>
             <p *ngIf="featured.length === 0" class="empty">No movies yet. Be the first to comment!</p>
@@ -34,15 +31,15 @@
             </div>
         </section>
 
-        <!-- Latest Comments -->
         <section class="section">
             <h2 class="section-title">Latest Comments</h2>
             <p *ngIf="latestComments.length === 0" class="empty">No comments yet.</p>
             <ion-card *ngFor="let comment of latestComments" class="comment-card"
                 (click)="goToDetail(comment.movie?.tmdbId)">
                 <ion-card-content>
+                    <!-- Fixed grid layout prevents squishing -->
                     <div class="comment-header">
-                        <ion-avatar>
+                        <ion-avatar class="avatar" (click)="goToPublicProfile($event, comment.user?._id)">
                             <img *ngIf="comment.user?.profilePicture" [src]="comment.user.profilePicture" />
                             <div *ngIf="!comment.user?.profilePicture" class="avatar-placeholder">
                                 {{ comment.user?.name?.[0] }}
@@ -55,9 +52,18 @@
                             </div>
                             <span class="movie-ref">🎬 {{ comment.movie?.title }}</span>
                         </div>
-                        <app-rating-badge [rating]="comment.rating" />
+                        <div class="rating-col">
+                            <app-rating-badge [rating]="comment.rating" />
+                        </div>
                     </div>
-                    <p class="comment-content">{{ comment.content }}</p>
+                    <!-- Truncated content with expand -->
+                    <p class="comment-content">
+                        {{ comment.expanded ? comment.content : (comment.content | slice:0:150) }}
+                        <span *ngIf="comment.content?.length > 150" class="read-more"
+                            (click)="toggleExpand($event, comment)">
+                            {{ comment.expanded ? ' Show less' : '... Read more' }}
+                        </span>
+                    </p>
                 </ion-card-content>
             </ion-card>
         </section>

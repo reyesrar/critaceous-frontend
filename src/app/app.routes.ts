@@ -61,4 +61,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/movie-detail/movie-detail/movie-detail.page').then((m) => m.MovieDetailPage),
   },
+  {
+    path: 'public-profile/:userId',
+    loadComponent: () =>
+      import('./features/public-profile/public-profile.page').then((m) => m.PublicProfilePage),
+  },
 ];

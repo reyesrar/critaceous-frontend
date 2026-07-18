@@ -67,4 +67,12 @@ export class ApiService {
   deleteMe() {
     return firstValueFrom(this.http.delete(`${API}/users/me`));
   }
+
+  getMyCommentForMovie(tmdbId: string) {
+    return firstValueFrom(this.http.get<any>(`${API}/comments/movie/${tmdbId}/mine`));
+  }
+
+  getPublicProfile(userId: string) {
+    return firstValueFrom(this.http.get<any>(`${API}/users/${userId}/public`));
+  }
 }

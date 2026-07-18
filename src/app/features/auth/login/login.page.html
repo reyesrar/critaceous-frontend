@@ -7,13 +7,13 @@
 
     <div class="form">
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" [(ngModel)]="email" />
+        <!-- label-placement fixes floating animation -->
+        <ion-input label="Email" label-placement="floating" type="email" [(ngModel)]="email" autocomplete="email" />
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" [(ngModel)]="password" />
+        <ion-input label="Password" label-placement="floating" type="password" [(ngModel)]="password"
+          autocomplete="current-password" [clearOnEdit]="false" />
       </ion-item>
 
       <p *ngIf="error" class="error">{{ error }}</p>

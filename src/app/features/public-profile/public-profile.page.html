@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button />
+        </ion-buttons>
+        <ion-title>{{ user?.name }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="loading" class="loading"><ion-spinner name="crescent" /></div>
+
+    <ng-container *ngIf="!loading && user">
+        <div class="public-hero">
+            <ion-avatar class="profile-avatar">
+                <img *ngIf="user.profilePicture" [src]="user.profilePicture" />
+                <div *ngIf="!user.profilePicture" class="avatar-placeholder">{{ user.name[0] }}</div>
+            </ion-avatar>
+            <h1 class="profile-name">{{ user.name }}</h1>
+            <ion-badge [color]="user.role === 'critic' ? 'warning' : 'medium'">
+                {{ user.role | titlecase }}
+            </ion-badge>
+        </div>
+    </ng-container>
+</ion-content>

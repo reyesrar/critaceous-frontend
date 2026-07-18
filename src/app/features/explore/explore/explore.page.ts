@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import {
   IonContent, IonHeader, IonToolbar, IonTitle,
   IonSearchbar, IonSelect, IonSelectOption,
-  IonCard, IonBadge, IonSpinner
+  IonCard, IonBadge, IonSpinner, IonRange, IonLabel
 } from '@ionic/angular/standalone';
+import { Storage } from '@ionic/storage-angular';
 import { ApiService } from '../../../core/services/api.service';
 import { RatingBadgeComponent } from '../../../shared/components/rating-badge/rating-badge.component';
 
@@ -19,24 +20,30 @@ import { RatingBadgeComponent } from '../../../shared/components/rating-badge/ra
     CommonModule, FormsModule, RatingBadgeComponent,
     IonContent, IonHeader, IonToolbar, IonTitle,
     IonSearchbar, IonSelect, IonSelectOption,
-    IonCard, IonBadge, IonSpinner
+    IonCard, IonBadge, IonSpinner, IonRange, IonLabel
   ],
 })
 export class ExplorePage implements OnInit {
   results: any[] = [];
   searchTerm = '';
   selectedGenre = '';
-  sortBy = 'popularity';
+  sortBy = 'popularity_desc';
   minUserRating = 0;
   minCriticRating = 0;
   genres: string[] = [];
   loading = false;
-  // Track if user is searching TMDB or browsing local DB
   searchingTMDB = false;
 
-  constructor(private api: ApiService, private router: Router) {}
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private storage: Storage
+  ) {}
 
   async ngOnInit() {
+    // Sync default sort from settings
+    const saved = await this.storage.get('defaultSort');
+    if (saved) this.sortBy = saved;
     await this.loadLocal();
   }
 
@@ -60,7 +67,6 @@ export class ExplorePage implements OnInit {
     if (!this.searchTerm.trim()) { await this.loadLocal(); return; }
     this.loading = true;
     try {
-      // Search TMDB for broader results
       this.results = await this.api.searchMovies(this.searchTerm);
       this.searchingTMDB = true;
     } finally {
@@ -80,7 +86,6 @@ export class ExplorePage implements OnInit {
   }
 
   goToDetail(movie: any) {
-    // TMDB results use 'id', local DB uses 'tmdbId'
     const id = movie.tmdbId ?? String(movie.id);
     this.router.navigate(['/movie', id]);
   }

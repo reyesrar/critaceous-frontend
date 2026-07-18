@@ -30,16 +30,15 @@ export class HomeTabPage implements OnInit {
 
   async ngOnInit() {
     try {
-      // Load movies rated by users (persisted in DB)
-      this.featured = await this.api.getAllMovies({ sortBy: 'popularity' });
-      // Load latest comments across all movies
+      this.featured = await this.api.getAllMovies({ sortBy: 'popularity_desc' });
       const all = await Promise.all(
         this.featured.map(m => this.api.getCommentsByMovie(m.tmdbId))
       );
       this.latestComments = (all as any[][])
-      .flat()
-      .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      .slice(0, 10);
+        .flat()
+        .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 10)
+        .map((c: any) => ({ ...c, expanded: false }));
     } finally {
       this.loading = false;
     }
@@ -47,5 +46,16 @@ export class HomeTabPage implements OnInit {
 
   goToDetail(tmdbId: string) {
     this.router.navigate(['/movie', tmdbId]);
+  }
+
+  goToPublicProfile(event: Event, userId: string) {
+    // Prevent card click from triggering
+    event.stopPropagation();
+    if (userId) this.router.navigate(['/public-profile', userId]);
+  }
+
+  toggleExpand(event: Event, comment: any) {
+    event.stopPropagation();
+    comment.expanded = !comment.expanded;
   }
 }

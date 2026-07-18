@@ -11,7 +11,15 @@
   <div *ngIf="loading" class="loading"><ion-spinner name="crescent" /></div>
 
   <ng-container *ngIf="!loading && movie">
-    <img [src]="movie.poster" [alt]="movie.title" class="detail-poster" />
+
+    <!-- Full poster without cropping -->
+    <div class="poster-container">
+      <img [src]="movie.poster" [alt]="movie.title" class="detail-poster" />
+      <!-- Floating scroll indicator -->
+      <div class="scroll-hint">
+        <ion-icon name="chevron-down-outline" />
+      </div>
+    </div>
 
     <div class="detail-info">
       <h1 class="detail-title">{{ movie.title }}</h1>
@@ -39,20 +47,21 @@
         <ion-badge *ngFor="let a of movie.actors" color="medium">{{ a }}</ion-badge>
       </div>
 
-      <!-- Add comment -->
-      <h2 class="section-title">Leave a Comment</h2>
+      <!-- Comment form: shows edit or new -->
+      <h2 class="section-title">{{ isEditing ? 'Edit Your Review' : 'Leave a Review' }}</h2>
       <div class="comment-form">
-        <ion-item>
-          <ion-label position="floating">Your review</ion-label>
-          <ion-textarea [(ngModel)]="newComment" rows="3" />
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Rating (1-10)</ion-label>
-          <ion-input type="number" [(ngModel)]="newRating" min="1" max="10" />
-        </ion-item>
+        <textarea class="comment-textarea" [(ngModel)]="newComment" placeholder="Write your review..."
+          rows="3"></textarea>
+
+        <!-- Rating slider with 0.5 increments -->
+        <div class="rating-slider-row">
+          <span class="slider-label">Rating: <strong>{{ newRating }}</strong>/10</span>
+          <ion-range [(ngModel)]="newRating" [min]="1" [max]="10" [step]="0.5" [snaps]="true" color="success" />
+        </div>
+
         <ion-button expand="block" (click)="submitComment()" [disabled]="submitting">
           <ion-spinner *ngIf="submitting" name="crescent" />
-          <span *ngIf="!submitting">Submit</span>
+          <span *ngIf="!submitting">{{ isEditing ? 'Update Review' : 'Submit Review' }}</span>
         </ion-button>
       </div>
 
@@ -62,8 +71,9 @@
 
       <ion-card *ngFor="let comment of comments" class="comment-card">
         <ion-card-content>
+          <!-- Fixed grid layout -->
           <div class="comment-header">
-            <ion-avatar>
+            <ion-avatar class="avatar" (click)="goToPublicProfile($event, comment.user?._id)">
               <img *ngIf="comment.user?.profilePicture" [src]="comment.user.profilePicture" />
               <div *ngIf="!comment.user?.profilePicture" class="avatar-placeholder">
                 {{ comment.user?.name?.[0] }}
@@ -76,9 +86,17 @@
               </div>
               <span class="comment-date">{{ comment.createdAt | date:'mediumDate' }}</span>
             </div>
-            <app-rating-badge [rating]="comment.rating" />
+            <div class="rating-col">
+              <app-rating-badge [rating]="comment.rating" />
+            </div>
           </div>
-          <p class="comment-content">{{ comment.content }}</p>
+          <!-- Expandable content -->
+          <p class="comment-content" (click)="toggleExpand(comment)">
+            {{ comment.expanded ? comment.content : (comment.content | slice:0:150) }}
+            <span *ngIf="comment.content?.length > 150" class="read-more">
+              {{ comment.expanded ? ' Show less' : '... Read more' }}
+            </span>
+          </p>
         </ion-card-content>
       </ion-card>
 

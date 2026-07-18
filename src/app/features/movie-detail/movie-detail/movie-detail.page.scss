@@ -7,10 +7,53 @@ ion-content {
     --background: #2c302e;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 48px;
+}
+
+/* Full poster without cropping */
+.poster-container {
+    position: relative;
+    width: 100%;
+}
+
 .detail-poster {
     width: 100%;
-    height: 380px;
-    object-fit: cover;
+    object-fit: contain;
+    background: #000;
+    display: block;
+}
+
+/* Floating scroll indicator */
+.scroll-hint {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(44, 48, 46, 0.8);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ae19d;
+    font-size: 18px;
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(4px);
+    }
 }
 
 .detail-info {
@@ -57,13 +100,7 @@ ion-content {
     margin-bottom: 20px;
 }
 
-.directors {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
-}
-
+.directors,
 .actors {
     display: flex;
     flex-wrap: wrap;
@@ -76,15 +113,79 @@ ion-content {
     font-size: 14px;
 }
 
+.comment-form {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .comment-textarea {
+        width: 100%;
+        background: #474a48;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 14px;
+        resize: none;
+        box-sizing: border-box;
+
+        &::placeholder {
+            color: #909590;
+        }
+
+        &:focus {
+            outline: 1px solid #9ae19d;
+        }
+    }
+
+    /* Rating slider row */
+    .rating-slider-row {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .slider-label {
+            color: #909590;
+            font-size: 13px;
+
+            strong {
+                color: #9ae19d;
+            }
+        }
+
+        ion-range {
+            --bar-background: #474a48;
+            --bar-background-active: #9ae19d;
+            --knob-background: #9ae19d;
+            padding: 0;
+        }
+    }
+
+    ion-button {
+        --background: #537a5a;
+        --border-radius: 8px;
+    }
+}
+
 .comment-card {
     --background: #474a48;
     margin-bottom: 12px;
 
+    /* Fixed grid prevents squishing */
     .comment-header {
-        display: flex;
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
         margin-bottom: 8px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        cursor: pointer;
     }
 
     .avatar-placeholder {
@@ -96,25 +197,27 @@ ion-content {
         align-items: center;
         justify-content: center;
         font-weight: 700;
-        font-size: 18px;
+        font-size: 16px;
         border-radius: 50%;
     }
 
     .comment-meta {
-        flex: 1;
         display: flex;
         flex-direction: column;
         gap: 2px;
+        min-width: 0;
 
         .user-row {
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
         .user-name {
             color: #ffffff;
             font-size: 14px;
+            font-weight: 600;
         }
 
         .comment-date {
@@ -123,9 +226,20 @@ ion-content {
         }
     }
 
+    .rating-col {
+        flex-shrink: 0;
+    }
+
     .comment-content {
         color: #d0d0d0;
         font-size: 14px;
         margin: 0;
+        line-height: 1.5;
+        cursor: pointer;
+    }
+
+    .read-more {
+        color: #9ae19d;
+        font-size: 13px;
     }
 }

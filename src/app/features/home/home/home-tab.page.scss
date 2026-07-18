@@ -7,6 +7,12 @@ ion-content {
     --background: #2c302e;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 48px;
+}
+
 .section {
     padding: 16px;
 }
@@ -18,16 +24,32 @@ ion-content {
     margin-bottom: 12px;
 }
 
-/* Horizontal scroll for featured movies */
+.empty {
+    color: #909590;
+    font-size: 14px;
+}
+
+/* Visible lime scrollbar for horizontal scroll */
 .horizontal-scroll {
     display: flex;
     gap: 12px;
     overflow-x: auto;
-    padding-bottom: 8px;
-    scrollbar-width: none;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #9ae19d transparent;
 
     &::-webkit-scrollbar {
-        display: none;
+        height: 4px;
+        display: block;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #9ae19d;
+        border-radius: 999px;
     }
 }
 
@@ -68,11 +90,20 @@ ion-content {
     margin-bottom: 12px;
     cursor: pointer;
 
+    /* Fixed grid prevents squishing */
     .comment-header {
-        display: flex;
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
         margin-bottom: 8px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        cursor: pointer;
     }
 
     .avatar-placeholder {
@@ -84,38 +115,53 @@ ion-content {
         align-items: center;
         justify-content: center;
         font-weight: 700;
-        font-size: 18px;
+        font-size: 16px;
         border-radius: 50%;
     }
 
     .comment-meta {
-        flex: 1;
         display: flex;
         flex-direction: column;
         gap: 2px;
+        min-width: 0;
 
         .user-row {
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
         .user-name {
             color: #ffffff;
             font-size: 14px;
+            font-weight: 600;
         }
 
-        /* Movie reference in latest comments */
         .movie-ref {
             color: #9ae19d;
             font-size: 12px;
             font-style: italic;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+    }
+
+    .rating-col {
+        flex-shrink: 0;
     }
 
     .comment-content {
         color: #d0d0d0;
         font-size: 14px;
         margin: 0;
+        line-height: 1.5;
+    }
+
+    .read-more {
+        color: #9ae19d;
+        font-size: 13px;
+        cursor: pointer;
     }
 }

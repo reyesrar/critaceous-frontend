@@ -1,4 +1,6 @@
-ion-content { --background: #2c302e; }
+ion-content {
+  --background: #2c302e;
+}
 
 .login-container {
   display: flex;
@@ -16,8 +18,20 @@ ion-content { --background: #2c302e; }
   align-items: center;
   gap: 8px;
 
-  .mascot { width: 100px; height: 100px; object-fit: contain; background: #2c302e; }
-  .app-name { font-size: 28px; font-weight: 700; color: #9ae19d; letter-spacing: 2px; margin: 0; }
+  .mascot {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    background: #2c302e;
+  }
+
+  .app-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #9ae19d;
+    letter-spacing: 2px;
+    margin: 0;
+  }
 }
 
 .form {
@@ -26,8 +40,28 @@ ion-content { --background: #2c302e; }
   flex-direction: column;
   gap: 12px;
 
-  ion-item { --background: #474a48; --border-radius: 8px; --color: #ffffff; }
-  ion-button { --background: #537a5a; --border-radius: 8px; margin-top: 8px; }
-  ion-button[fill="clear"] { --color: #909590; font-size: 13px; }
-  .error { color: #ff6b6b; font-size: 13px; text-align: center; margin: 0; }
+  ion-item {
+    --background: #474a48;
+    --border-radius: 8px;
+    --color: #ffffff;
+  }
+
+  ion-button {
+    --background: #537a5a;
+    --border-radius: 8px;
+    margin-top: 8px;
+  }
+
+  /* Fixed: white text for clear buttons (#1) */
+  ion-button[fill="clear"] {
+    --color: #ffffff;
+    font-size: 13px;
+  }
+
+  .error {
+    color: #ff6b6b;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+  }
 }

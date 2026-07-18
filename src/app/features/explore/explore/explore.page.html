@@ -9,28 +9,42 @@
     debounce="400" />
 
   <div class="filters" *ngIf="!searchingTMDB">
+
     <ion-select [(ngModel)]="selectedGenre" (ionChange)="applyFilters()" placeholder="Genre" interface="popover">
       <ion-select-option value="">All Genres</ion-select-option>
       <ion-select-option *ngFor="let g of genres" [value]="g">{{ g }}</ion-select-option>
     </ion-select>
 
+    <!-- Sort with ascending and descending -->
     <ion-select [(ngModel)]="sortBy" (ionChange)="applyFilters()" placeholder="Sort by" interface="popover">
-      <ion-select-option value="popularity">Popularity</ion-select-option>
-      <ion-select-option value="userRating">User Rating</ion-select-option>
-      <ion-select-option value="criticRating">Critic Rating</ion-select-option>
-      <ion-select-option value="releaseDate">Release Date</ion-select-option>
+      <ion-select-option value="popularity_desc">Popularity ↓</ion-select-option>
+      <ion-select-option value="popularity_asc">Popularity ↑</ion-select-option>
+      <ion-select-option value="userRating_desc">User Rating ↓</ion-select-option>
+      <ion-select-option value="userRating_asc">User Rating ↑</ion-select-option>
+      <ion-select-option value="criticRating_desc">Critic Rating ↓</ion-select-option>
+      <ion-select-option value="criticRating_asc">Critic Rating ↑</ion-select-option>
+      <ion-select-option value="releaseDate_desc">Release Date ↓</ion-select-option>
+      <ion-select-option value="releaseDate_asc">Release Date ↑</ion-select-option>
     </ion-select>
 
-    <ion-select [(ngModel)]="minUserRating" (ionChange)="applyFilters()" placeholder="User Rating" interface="popover">
-      <ion-select-option [value]="0">Any User Rating</ion-select-option>
-      <ion-select-option *ngFor="let n of [1,2,3,4,5,6,7,8,9]" [value]="n">{{ n }}+</ion-select-option>
-    </ion-select>
+    <!-- User rating slider -->
+    <div class="slider-filter">
+      <span class="filter-label">
+        User Rating: <strong>{{ minUserRating > 0 ? minUserRating + '+' : 'Any' }}</strong>
+      </span>
+      <ion-range [(ngModel)]="minUserRating" (ionChange)="applyFilters()" [min]="0" [max]="10" [step]="0.5"
+        [snaps]="true" color="success" />
+    </div>
 
-    <ion-select [(ngModel)]="minCriticRating" (ionChange)="applyFilters()" placeholder="Critic Rating"
-      interface="popover">
-      <ion-select-option [value]="0">Any Critic Rating</ion-select-option>
-      <ion-select-option *ngFor="let n of [1,2,3,4,5,6,7,8,9]" [value]="n">{{ n }}+</ion-select-option>
-    </ion-select>
+    <!-- Critic rating slider -->
+    <div class="slider-filter">
+      <span class="filter-label">
+        Critic Rating: <strong>{{ minCriticRating > 0 ? minCriticRating + '+' : 'Any' }}</strong>
+      </span>
+      <ion-range [(ngModel)]="minCriticRating" (ionChange)="applyFilters()" [min]="0" [max]="10" [step]="0.5"
+        [snaps]="true" color="success" />
+    </div>
+
   </div>
 
   <div *ngIf="loading" class="loading"><ion-spinner name="crescent" /></div>

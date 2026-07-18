@@ -24,7 +24,6 @@ ion-content {
 .profile-avatar {
     width: 90px;
     height: 90px;
-    margin-bottom: 8px;
 
     .avatar-placeholder {
         width: 100%;
@@ -38,19 +37,6 @@ ion-content {
         font-weight: 700;
         border-radius: 50%;
     }
-}
-
-.profile-name {
-    color: #ffffff;
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0;
-}
-
-.profile-email {
-    color: #909590;
-    font-size: 14px;
-    margin: 0;
 }
 
 .stats {
@@ -96,6 +82,25 @@ ion-content {
         h3 {
             color: #ffffff;
             font-size: 15px;
+        }
+    }
+
+    .edit-actions {
+        display: flex;
+        gap: 8px;
+        padding: 8px 0;
+
+        ion-button {
+            flex: 1;
+        }
+
+        ion-button[fill="outline"] {
+            --color: #9ae19d;
+            --border-color: #9ae19d;
+        }
+
+        ion-button:last-child {
+            --background: #537a5a;
         }
     }
 }

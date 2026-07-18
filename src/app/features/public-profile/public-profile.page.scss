@@ -1,0 +1,47 @@
+ion-toolbar {
+    --background: #2c302e;
+    --color: #9ae19d;
+}
+
+ion-content {
+    --background: #2c302e;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 48px;
+}
+
+.public-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 16px 24px;
+    gap: 12px;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+
+    .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        background: #537a5a;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        font-weight: 700;
+        border-radius: 50%;
+    }
+}
+
+.profile-name {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}

@@ -7,6 +7,12 @@ ion-content {
     --background: #2c302e;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 48px;
+}
+
 ion-searchbar {
     --background: #474a48;
     --color: #ffffff;
@@ -16,19 +22,44 @@ ion-searchbar {
 }
 
 .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
     padding: 0 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
     ion-select {
-        flex: 1;
-        min-width: 120px;
         background: #474a48;
         color: #ffffff;
         border-radius: 8px;
         padding: 8px 12px;
         font-size: 13px;
+        width: 100%;
+    }
+
+    /* Slider filter */
+    .slider-filter {
+        background: #474a48;
+        border-radius: 8px;
+        padding: 8px 12px;
+
+        .filter-label {
+            color: #909590;
+            font-size: 12px;
+            display: block;
+            margin-bottom: 4px;
+
+            strong {
+                color: #9ae19d;
+            }
+        }
+
+        ion-range {
+            --bar-background: #2c302e;
+            --bar-background-active: #9ae19d;
+            --knob-background: #9ae19d;
+            padding: 0;
+            height: 32px;
+        }
     }
 }
 
